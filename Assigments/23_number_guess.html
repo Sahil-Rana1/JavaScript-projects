@@ -1,0 +1,46 @@
+// Q16. Create a number guessing game logic using a do-while loop that keeps asking until correct, tracking
+// attempts and showing hints.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guess</title>
+</head>
+<body>
+    <h3>Guess The Number Between 1 to 10</h3>
+    <input type="number" id="input">
+    <input type="button" value="Check" id="btn">
+    <h4 id="result"></h4>
+
+    <script>
+        const input = document.querySelector("#input");
+        const btn = document.querySelector("#btn");
+        const msg = document.querySelector('#result');
+
+        const random = Math.floor(Math.random() * 10) + 1; // 1 to 10
+        let attempts = 0;
+
+        console.log("Random number (for testing):", random);
+
+        btn.addEventListener('click', function() {
+            const guess = Number(input.value); // get the user's input
+            attempts++;
+
+            if (guess < random) {
+                msg.innerText = `Too low! Try again. Attempts: ${attempts}`;
+            } else if (guess > random) {
+                msg.innerText = `Too high! Try again. Attempts: ${attempts}`;
+            } else if (guess === random) {
+                msg.innerText = `Correct!  ${attempts} attempts.`;
+                btn.disabled = true; // disable button after correct guess
+            } else {
+                msg.innerText = `Invalid input!`;
+            }
+
+            input.value = ""; // clear input for next guess
+            input.focus(); // focus input for convenience
+        });
+    </script>
+</body>
+</html>
